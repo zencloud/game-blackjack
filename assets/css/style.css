@@ -1,0 +1,17 @@
+/* Blackjack Stylesheet */
+
+
+/* Global */
+* {
+    box-sizing: border-box;
+}
+
+/* Custom Properties */
+:root{
+    --site-theme-color: #000000;
+    --site-bg-color:    #26ad5e;
+}
+
+body, html {
+    background-color: var(--site-bg-color);
+}
