@@ -30,16 +30,18 @@ body, html {
     width: max-content;
     margin: auto;
     min-width: 500px;
+    min-height: 220px;
     padding: 20px;
     background-color: #1e894b;
     border-radius: 10px;
+    text-align: center;
 }
 
-.dealer-container {
+#dealer-container {
     margin-top: 50px;
 }
 
-.player-container {
+#player-container {
 
 }
 
@@ -59,7 +61,13 @@ body, html {
 }
 
 #game-stage {
-    height: 125px;
+    display: flex;
+    justify-content: space-evenly;
+    height: max-content;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #player-info, .message-alert {
@@ -81,7 +89,7 @@ body, html {
     position: relative;
     background-color: #96205b;
     justify-content: center;
-    /* display: none; */
+    display: none;
 }
 
 .message-alert-icon {
@@ -97,7 +105,17 @@ body, html {
     font-size: 20px;
     width: 158px;
     height: 57px;
-    border-radius: 10px;
+    margin: 10px;
+    border-radius: 16px;
     border: none;
     background-image: url("/assets/imgs/button-bg.png");
+}
+
+.btn-normal:hover {
+    border: 3px solid #282828;
+}
+
+.btn-normal:active {
+    border: 3px solid #ffc400;
+    transform: scale(0.9);
 }
