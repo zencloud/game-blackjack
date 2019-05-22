@@ -13,5 +13,91 @@
 }
 
 body, html {
+    width: 100%;
     background-color: var(--site-bg-color);
+    font-size: 16;
+    font-weight: 400;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+    min-height: 100%;
+    text-align: center;
+}
+
+.card-container {
+    width: max-content;
+    margin: auto;
+    min-width: 500px;
+    padding: 20px;
+    background-color: #1e894b;
+    border-radius: 10px;
+}
+
+.dealer-container {
+    margin-top: 50px;
+}
+
+.player-container {
+
+}
+
+.card-cell {
+    position: relative;
+    display: inline-block;
+}
+
+.game-info {
+    display: inline-block;
+    height: max-content;
+    min-width: 500px;
+    padding: 10px;
+    margin: 0 auto;
+    text-align: left;
+    line-height: 25px;
+}
+
+#game-stage {
+    height: 125px;
+}
+
+#player-info, .message-alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #282828;
+    width: 500px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    height: 30px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 300
+}
+
+.message-alert {
+    position: relative;
+    background-color: #96205b;
+    justify-content: center;
+    /* display: none; */
+}
+
+.message-alert-icon {
+    position: absolute;
+    left: 8px;
+    font-size: 16px;
+}
+
+/* BUTTONS */
+.btn-normal {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    width: 158px;
+    height: 57px;
+    border-radius: 10px;
+    border: none;
+    background-image: url("/assets/imgs/button-bg.png");
 }
