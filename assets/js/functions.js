@@ -284,7 +284,7 @@ function game_ui_update_hand(hand, next) {
         if (hand === gameData.handDealer && i == 0) { cardImg = "back"; }
 
         // Assign card image and classes
-        childDiv.innerHTML = `<img src="/assets/imgs/${cardImg}.png">`;
+        childDiv.innerHTML = `<img src="assets/imgs/${cardImg}.png">`;
         childDiv.classList.add("card-cell");
 
         // Animation: Check if card is last to be rendered and flip in
