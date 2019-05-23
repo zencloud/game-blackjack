@@ -66,6 +66,18 @@ function game_get_hand_total(hand) {
         }
     }
 
+    // Ace Check Modifier
+    let aceCheck = hand.includes("a");
+    let tenCheck = false;
+    if (hand.includes("10") || hand.includes("k") || hand.includes("q") || hand.includes("j")) {
+        tenCheck = true;
+    }
+
+    // Add 1 to total because Ace is an 11 in this instance.
+    if (aceCheck && tenCheck) {
+        handTotal++;
+    }
+
     // Return Total
     return handTotal;
 }
@@ -117,6 +129,23 @@ function game_choice_start_round() {
 
     // Update Hands UI
     game_ui_update_hand_total();
+
+    // Check if Blackjack
+    if (game_check_blackjack()) {
+
+        // Alert Message
+        game_alert_show("Blackjack! Player Wins!");
+        
+        // Change Alert window color (hacky)
+        let alertDiv = document.getElementById("message-alert");
+        alertDiv.style.backgroundColor = "#09610f";
+
+        // Give Player Credits
+        gameData.creditsPlayer += gameData.creditsBet*3;
+
+        // Update Game Stage
+        game_ui_update_game_stage(3);
+    }
 }
 
 
@@ -144,6 +173,11 @@ function game_choice_hit() {
         // Update Stage
         game_ui_update_game_stage(3);
     }
+
+    // Check if Blackjack
+    if (game_check_blackjack()) {
+        game_player_blackjack();
+    }
 }
 
 // Player stands
@@ -162,6 +196,7 @@ function game_choice_stand () {
 
     game_dealer_reveal_cards();
     game_get_winner();
+    game_ui_update_stash();
     game_ui_update_game_stage(3);
 }
 
@@ -177,7 +212,7 @@ function game_alert_show (message) {
     // Write New Message
     msgDiv = document.getElementById("message-value");
     msgDiv.classList.add("animated");
-    msgDiv.classList.add("flipInX");
+    msgDiv.classList.add("bounceIn");
     msgDiv.textContent = message;
 }
 
@@ -195,24 +230,44 @@ function game_get_winner () {
     let playerHandTotal = game_get_hand_total(gameData.handPlayer);
     let dealerHandTotal = game_get_hand_total(gameData.handDealer);
 
-    if (playerHandTotal > dealerHandTotal) {
+    // Player Wins
+    if (playerHandTotal > dealerHandTotal || dealerHandTotal > 21) {
+        
+        // Alert Message
         game_alert_show("Player Wins!");
-
-        // Change color test
+        
+        // Change Alert window color (hacky)
         let alertDiv = document.getElementById("message-alert");
         alertDiv.style.backgroundColor = "#09610f";
-    }
 
-    if (playerHandTotal < dealerHandTotal) {
+        // Give Player Credits
+        gameData.creditsPlayer += gameData.creditsBet*2;
+
+    } 
+    
+    // Dealer Wins
+    else if (playerHandTotal < dealerHandTotal) {
+        
+        // Alert Message
         game_alert_show("Dealer Wins!");
 
+        // Change Alert window color (hacky)
         let alertDiv = document.getElementById("message-alert");
         alertDiv.style.backgroundColor = "#710000";
     }
 
-    if (playerHandTotal === dealerHandTotal) {
+    // Game is a tie
+    else if (playerHandTotal === dealerHandTotal) {
+
+        // Alert Message
         game_alert_show("Tie!");
+        
+        // Give back bet
+        gameData.creditsPlayer += gameData.creditsBet;
     }
+
+    // Update Stash Total
+    game_ui_update_stash();
 }
 
 
@@ -222,9 +277,18 @@ function game_reset () {
     // Reset Cards HTML
     game_ui_clear_cards();
 
+    // Clear Bet
+    gameData.creditsBet = 0;
+    let betDiv = document.getElementById("data-bet");
+    betDiv.textContent = gameData.creditsBet;
+
+    // Reset Message Color
+    let alertDiv = document.getElementById("message-alert");
+    alertDiv.style.backgroundColor = "#96205b";
+
     // Clear Dealer Data Hand Total
     let totalDiv = document.getElementById("data-dealer-hand-total");
-    totalDiv.textContent = "?";
+    totalDiv.textContext = "?";
     
     // Clear Player Data Hand Total
     totalDiv = document.getElementById("data-hand-total");
@@ -272,7 +336,44 @@ function game_check_bust() {
     }
 }
 
+
+// Return if player is at 21
+function game_check_blackjack() {
+    if (game_get_hand_total(gameData.handPlayer) === 21) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+/// Playr Wins BlackJack
+function game_player_blackjack () {
+    
+    // Check if Blackjack
+    if (game_check_blackjack()) {
+
+        // Alert Message
+        game_alert_show("Blackjack! Player Wins!");
+        
+        // Change Alert window color (hacky)
+        let alertDiv = document.getElementById("message-alert");
+        alertDiv.style.backgroundColor = "#09610f";
+
+        // Give Player Credits
+        gameData.creditsPlayer += gameData.creditsBet*3;
+
+        // Update Game Stage
+        game_ui_update_game_stage(3);
+    }
+}
 /// --- Update Deck visuals
+
+// Update Stash Total
+function game_ui_update_stash () {
+    let stashDiv = document.getElementById("data-stash");
+    stashDiv.textContent = gameData.creditsPlayer;
+}
 
 // Update Player Hand Totals
 function game_ui_update_hand_total() {

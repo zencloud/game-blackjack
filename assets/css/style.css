@@ -29,7 +29,14 @@ body, html {
 }
 
 .logo {
-    margin-top: 15px;
+
+}
+
+.header {
+    background-color: #282828;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .card-container {
     width: max-content;
@@ -116,9 +123,7 @@ body, html {
 }
 
 #message-value {
-    position: absolute;
-    top: 7px;
-    left: 42%;
+    margin-top: -3px;
 }
 
 /* BUTTONS */
@@ -127,18 +132,23 @@ body, html {
     font-weight: 400;
     font-size: 20px;
     width: 158px;
-    height: 57px;
+    height: 55px;
     margin: 10px;
     border-radius: 16px;
-    border: none;
-    background-image: url("../../assets/imgs/button-bg.png");
+    background-color: #ecf0f1;
+    border-right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 7px solid #cdd0d1;
+    /* background-image: url("../../assets/imgs/button-bg.png"); */
 }
 
 .btn-normal:hover {
-    border: 3px solid #282828;
+    box-shadow: 0px 3px rgb(58, 62, 60, 0.5);
+    transform: scale(1.05);   
 }
 
 .btn-normal:active {
-    border: 3px solid #ffc400;
+    /* box-shadow: inset 0px 5px 0px rgb(58, 62, 60, 0.2); */
     transform: scale(0.9);
 }
