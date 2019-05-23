@@ -1,5 +1,14 @@
 // Game Functions
 
+/// -------------------------------------///
+///                CONTENTS:
+/// - Deck Control
+/// - Player Choices
+/// - General Game Functions
+/// - Update UI/DOM
+/// -------------------------------------///
+
+
 /// --- Deck Control
 
 // Generate new deck with shuffle
@@ -32,6 +41,46 @@ function game_deck_draw() {
 
     // Return Card Pulled
     return result;
+}
+
+// Return Player/Dealer hand total value
+function game_get_hand_total(hand) {
+
+    // Holds total card value
+    let handTotal = 0;
+
+    // Loop through each card and get value
+    for (let i = 0; i < hand.length; i++) {
+
+        // Evaluate int/string from card value
+        let handValue = parseInt(hand[i]);
+
+        // Is a number, add to the total
+        if (Number.isInteger(handValue)) {
+            handTotal += handValue;
+        }
+
+        // Is not number, let's determine the value
+        if (!Number.isInteger(handValue)) {
+            handTotal += 10;
+        }
+    }
+
+    // Return Total
+    return handTotal;
+}
+
+// Dealer Reveal Card
+function game_dealer_reveal_cards () {
+
+    let cardDiv = document.getElementsByClassName("card-cell")[0];
+    let cardValue = gameData.handDealer[0];
+    cardDiv.innerHTML = `
+        <img src="assets/imgs/${cardValue}.png">
+    `;
+
+    let totalDiv = document.getElementById("data-dealer-hand-total");
+    totalDiv.textContent = game_get_hand_total(gameData.handDealer);
 }
 
 /// --- Round Control
@@ -140,19 +189,6 @@ function game_ui_clear_cards () {
     clearStage.innerHTML = ``;
 }
 
-// Dealer Reveal Card
-function game_dealer_reveal_cards () {
-
-    let cardDiv = document.getElementsByClassName("card-cell")[0];
-    let cardValue = gameData.handDealer[0];
-    cardDiv.innerHTML = `
-        <img src="assets/imgs/${cardValue}.png">
-    `;
-
-    let totalDiv = document.getElementById("data-dealer-hand-total");
-    totalDiv.textContent = game_get_hand_total(gameData.handDealer);
-}
-
 function game_get_winner () {
 
     // Get Totals
@@ -179,34 +215,8 @@ function game_get_winner () {
     }
 }
 
-// Get hand total value
-function game_get_hand_total(hand) {
 
-    // Holds total card value
-    let handTotal = 0;
-
-    // Loop through each card and get value
-    for (let i = 0; i < hand.length; i++) {
-
-        // Evaluate int/string from card value
-        let handValue = parseInt(hand[i]);
-
-        // Is a number, add to the total
-        if (Number.isInteger(handValue)) {
-            handTotal += handValue;
-        }
-
-        // Is not number, let's determine the value
-        if (!Number.isInteger(handValue)) {
-            handTotal += 10;
-        }
-    }
-
-    // Return Total
-    return handTotal;
-}
-
-// Game Reset
+// Game Reset for next round
 function game_reset () {
 
     // Reset Cards HTML
@@ -253,7 +263,7 @@ function game_reset () {
     game_generate_cards();
 }
 
-// Check for player bust
+// Return if player is over 21
 function game_check_bust() {
     if (game_get_hand_total(gameData.handPlayer) > 21) {
         return true;
@@ -261,7 +271,6 @@ function game_check_bust() {
         return false;
     }
 }
-
 
 /// --- Update Deck visuals
 
@@ -271,7 +280,7 @@ function game_ui_update_hand_total() {
     handDiv.textContent = game_get_hand_total(gameData.handPlayer);
 }
 
-// Update UI
+// Update Hand UI
 function game_ui_update_hand(hand, next) {
 
     // Only update last card
