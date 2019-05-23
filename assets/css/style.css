@@ -85,6 +85,11 @@ body, html {
     font-weight: 300
 }
 
+#data-hand-total, #data-bet, #data-stash {
+    font-weight: bold;
+    color: orange;
+}
+
 .message-alert {
     position: relative;
     background-color: #96205b;

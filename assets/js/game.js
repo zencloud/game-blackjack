@@ -28,6 +28,11 @@ const gameData = {
     // Hands
     handPlayer: [],
     handDealer: [],
+    uiHandPlayerTotal: 0,
+
+    // Credits
+    creditsPlayer: 100,
+    creditsBet:    0
 }
 
 // Shuffle Game Deck
