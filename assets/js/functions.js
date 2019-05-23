@@ -108,6 +108,10 @@ function game_choice_bet_add() {
     // Player has sufficient funds
     if (gameData.creditsPlayer > 5) {
         game_bet_add_value(5);
+
+        // Unlock Draw Button
+        let betBtn = document.getElementById("btn-bet");
+        betBtn.disabled = false;
     }
 
     // Player has insufficient funds
@@ -455,7 +459,7 @@ function game_ui_update_game_stage(gameStage) {
         case 1:
             stageHTML = `
                 <button class="btn-normal" onclick="game_choice_bet_add()">Bet +5 Credits</button>
-                <button class="btn-normal" onclick="game_choice_start_round()">Draw</button>
+                <button disabled="true" id="btn-bet" class="btn-normal" onclick="game_choice_start_round()">Draw</button>
             `;
             break;
 
