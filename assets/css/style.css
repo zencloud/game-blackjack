@@ -24,6 +24,8 @@ body, html {
 .wrapper {
     min-height: 100%;
     text-align: center;
+    width: max-content;
+    margin: 0 auto;
 }
 
 .card-container {
@@ -70,7 +72,7 @@ body, html {
     margin-bottom: 20px;
 }
 
-#player-info, .message-alert {
+#player-info, #dealer-info, #message-alert {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -79,27 +81,34 @@ body, html {
     width: 500px;
     margin: 0 auto;
     margin-bottom: 5px;
+    margin-top: 5px;
     height: 30px;
     border-radius: 15px;
     font-size: 15px;
-    font-weight: 300
+    font-weight: 300;
 }
 
-#data-hand-total, #data-bet, #data-stash {
+#dealer-info {
+    justify-content: center;
+}
+
+#data-hand-total, #data-dealer-hand-total, #data-bet, #data-stash {
     font-weight: bold;
     color: orange;
 }
 
-.message-alert {
+#message-alert {
     position: relative;
     background-color: #96205b;
     justify-content: center;
+    align-items: center;
     display: none;
 }
 
 .message-alert-icon {
     position: absolute;
     left: 8px;
+    top: 8px;
     font-size: 16px;
 }
 
