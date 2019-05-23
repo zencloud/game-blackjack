@@ -161,10 +161,17 @@ function game_get_winner () {
 
     if (playerHandTotal > dealerHandTotal) {
         game_alert_show("Player Wins!");
+
+        // Change color test
+        let alertDiv = document.getElementById("message-alert");
+        alertDiv.style.backgroundColor = "#09610f";
     }
 
     if (playerHandTotal < dealerHandTotal) {
         game_alert_show("Dealer Wins!");
+
+        let alertDiv = document.getElementById("message-alert");
+        alertDiv.style.backgroundColor = "#710000";
     }
 
     if (playerHandTotal === dealerHandTotal) {
@@ -205,8 +212,12 @@ function game_reset () {
     // Reset Cards HTML
     game_ui_clear_cards();
 
-    // Clear Data Hand Total
+    // Clear Dealer Data Hand Total
     let totalDiv = document.getElementById("data-dealer-hand-total");
+    totalDiv.textContent = "?";
+    
+    // Clear Player Data Hand Total
+    totalDiv = document.getElementById("data-hand-total");
     totalDiv.textContent = "?";
 
     // Add card back placeholders

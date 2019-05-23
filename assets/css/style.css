@@ -28,6 +28,9 @@ body, html {
     margin: 0 auto;
 }
 
+.logo {
+    margin-top: 15px;
+}
 .card-container {
     width: max-content;
     margin: auto;
@@ -40,7 +43,7 @@ body, html {
 }
 
 #dealer-container {
-    margin-top: 50px;
+    margin-top: 15px;
 }
 
 #player-container {
@@ -100,16 +103,22 @@ body, html {
 #message-alert {
     position: relative;
     background-color: #96205b;
-    justify-content: center;
-    align-items: center;
     display: none;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .message-alert-icon {
     position: absolute;
     left: 8px;
-    top: 8px;
+    top: 7px;
     font-size: 16px;
+}
+
+#message-value {
+    position: absolute;
+    top: 7px;
+    left: 42%;
 }
 
 /* BUTTONS */
