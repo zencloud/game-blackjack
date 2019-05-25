@@ -52,6 +52,8 @@ function game_get_hand_total(hand) {
     // Loop through each card and get value
     for (let i = 0; i < hand.length; i++) {
 
+        console.log(hand[i]);
+
         // Evaluate int/string from card value
         let handValue = parseInt(hand[i]);
 
@@ -62,7 +64,12 @@ function game_get_hand_total(hand) {
 
         // Is not number, let's determine the value
         if (!Number.isInteger(handValue)) {
-            handTotal += 10;
+            if (hand[i] === "a") {
+                handTotal += 11;
+            }
+            else {
+                handTotal += 10;
+            }
         }
     }
 
@@ -73,9 +80,8 @@ function game_get_hand_total(hand) {
         tenCheck = true;
     }
 
-    // Add 1 to total because Ace is an 11 in this instance.
-    if (aceCheck && tenCheck) {
-        handTotal++;
+    if (aceCheck && handTotal > 21) {
+        handTotal -= 10;
     }
 
     // Return Total
@@ -333,6 +339,8 @@ function game_reset () {
 
 // Return if player is over 21
 function game_check_bust() {
+
+    // 
     if (game_get_hand_total(gameData.handPlayer) > 21) {
         return true;
     } else {
